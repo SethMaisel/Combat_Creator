@@ -1,8 +1,13 @@
 class SequencesController < ApplicationController
 
     def index
-        sequences = Sequence.all 
-        render json: sequences
+        sequences = Sequence.includes(
+            :character,
+            :move,
+            :weapon
+        )
+        # byebug
+        render json: sequences, include:[:character, :move, :weapon]
     end
 
     def show
